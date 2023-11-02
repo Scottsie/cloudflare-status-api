@@ -102,6 +102,13 @@ def check_cloudflare_status_api(item, section) -> CheckResult:
                        summary = f"{output} is experiencing degraded performance.",
                        details = detail,
                     )
+                # results if major outage
+                elif site["status"] == "major_outage":
+                    yield Result(
+                       state = State.WARN,
+                       summary = f"{output} is in a major outage.",
+                       details = detail,
+                    )
                 # anything currently not observed in status
                 # outage or other status.
                 else:
